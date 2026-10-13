@@ -19,8 +19,8 @@
     "retry": "Try again"
   },
   "Footer": {
-    "madeIn": "Made in Montréal, Québec 🇨🇦",
-    "builtBy": "Built by <author>Sebastien Castiel</author> and <source>contributors</source>"
+    "madeIn": "Made by Amit Sarkar",
+    "builtBy": "On top of <source>Spliit</source>"
   },
   "Expenses": {
     "title": "Expenses",
@@ -323,7 +323,7 @@
       "subtitle": "Type your expense in plain English to get it split automatically",
       "welcomeMessage": "Hi! 👋 Tell me about your expense and I'll extract the title, amount, category, and split for you.",
       "suggestionsTitle": "Try one of these examples:",
-      "inputPlaceholder": "e.g. Alice paid $60 for dinner yesterday, split equally between Alice, Bob and Charlie...",
+      "inputPlaceholder": "Describe your expense...",
       "send": "Send",
       "thinking": "Analyzing expense...",
       "previewTitle": "Parsed Expense Breakdown",

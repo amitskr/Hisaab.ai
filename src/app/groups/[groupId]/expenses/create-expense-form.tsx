@@ -100,14 +100,14 @@ export function CreateExpenseForm({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2.5 sm:space-y-4">
       {/* Greeting and Dual-Mode Toggle */}
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
+          <h1 className="text-lg sm:text-2xl font-bold tracking-tight">
             {t('ModeSelector.greeting')}
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
             {t('ModeSelector.description')}
           </p>
         </div>
@@ -117,19 +117,19 @@ export function CreateExpenseForm({
           onValueChange={(val) => handleModeChange(val as 'ai' | 'manual')}
           className="w-full"
         >
-          <TabsList className="grid w-full grid-cols-2 h-11 p-1 bg-muted/60">
+          <TabsList className="grid w-full grid-cols-2 h-9 sm:h-11 p-0.5 sm:p-1 bg-muted/60">
             <TabsTrigger
               value="ai"
-              className="flex items-center gap-2 text-sm font-medium data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+              className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
               <span>{t('ModeSelector.aiMode')}</span>
             </TabsTrigger>
             <TabsTrigger
               value="manual"
-              className="flex items-center gap-2 text-sm font-medium data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+              className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              <Edit3 className="w-4 h-4 text-muted-foreground" />
+              <Edit3 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
               <span>{t('ModeSelector.manualMode')}</span>
             </TabsTrigger>
           </TabsList>

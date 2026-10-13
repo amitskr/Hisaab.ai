@@ -10,8 +10,8 @@ export const GroupHeader = () => {
   const { isLoading, groupId, group } = useCurrentGroup()
 
   return (
-    <div className="flex flex-col justify-between gap-3">
-      <h1 className="font-bold text-2xl">
+    <div className="flex flex-col justify-between gap-2 sm:gap-3">
+      <h1 className="font-bold text-xl sm:text-2xl">
         <Link href={`/groups/${groupId}`}>
           {isLoading ? (
             <Skeleton className="mt-1.5 mb-1.5 h-5 w-32" />

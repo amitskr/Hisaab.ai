@@ -30,7 +30,11 @@ export default function HomePage() {
               <Link href="/groups">{t('Homepage.button.groups')}</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="https://github.com/spliit-app/spliit">
+              <Link
+                href="https://github.com/amitskr/Hisaab.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GitHubLogoIcon className="w-4 h-4 mr-2" />
                 {t('Homepage.button.github')}
               </Link>
