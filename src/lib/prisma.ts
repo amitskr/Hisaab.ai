@@ -11,7 +11,8 @@ const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }
 // We use the `pg` adapter with the pooled connection string.
 function createPrismaClient() {
   const adapter = new PrismaPg({
-    connectionString: process.env['POSTGRES_PRISMA_URL'],
+    connectionString:
+      process.env['POSTGRES_PRISMA_URL'] || process.env['DATABASE_URL'],
   })
   const client = new PrismaClient({
     adapter,

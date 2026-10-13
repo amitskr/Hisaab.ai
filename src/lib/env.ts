@@ -35,8 +35,14 @@ const interpretEnvVarAsList = (val: unknown): unknown =>
 
 const envSchema = z
   .object({
-    POSTGRES_URL_NON_POOLING: z.string().url(),
-    POSTGRES_PRISMA_URL: z.string().url(),
+    POSTGRES_URL_NON_POOLING: z.preprocess(
+      (val) => val || process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL,
+      z.string().url(),
+    ),
+    POSTGRES_PRISMA_URL: z.preprocess(
+      (val) => val || process.env.DATABASE_URL || process.env.POSTGRES_URL_NON_POOLING,
+      z.string().url(),
+    ),
     // Runtime override for the public base URL, so a prebuilt image can be
     // told where it is reachable without a rebuild. Takes precedence over
     // NEXT_PUBLIC_BASE_URL, which is baked in at build time.
