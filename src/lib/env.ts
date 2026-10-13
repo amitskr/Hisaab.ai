@@ -127,6 +127,10 @@ const envSchema = z
       interpretBlankEnvVarAsUndefined,
       z.string().trim().default('gpt-5-nano'),
     ),
+    OPENAI_MODEL_EXPENSE_CHAT: z.preprocess(
+      interpretBlankEnvVarAsUndefined,
+      z.string().trim().default('gpt-4o-mini'),
+    ),
     // Analytics is disabled unless a provider is selected. Several can be
     // listed, comma-separated, to report to all of them at once. These are read
     // on the server and passed to the client as props, so they are deliberately

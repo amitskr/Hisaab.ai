@@ -64,7 +64,7 @@ import {
 } from '@/lib/utils'
 import { AppRouterOutput } from '@/trpc/routers/_app'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChevronRight, Save } from 'lucide-react'
+import { ChevronRight, Save, Sparkles } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -177,6 +177,8 @@ export function ExpenseForm({
   onSubmit,
   onDelete,
   runtimeFeatureFlags,
+  initialValues,
+  onSwitchToAi,
 }: {
   group: NonNullable<AppRouterOutput['groups']['get']['group']>
   categories: AppRouterOutput['categories']['list']['categories']
@@ -189,6 +191,8 @@ export function ExpenseForm({
   onSubmit: (value: ExpenseFormValues, participantId?: string) => Promise<void>
   onDelete?: (participantId?: string) => Promise<void>
   runtimeFeatureFlags: RuntimeFeatureFlags
+  initialValues?: Partial<ExpenseFormInput>
+  onSwitchToAi?: () => void
 }) {
   const t = useTranslations('ExpenseForm')
   const locale = useLocale() as Locale
@@ -280,22 +284,31 @@ export function ExpenseForm({
             recurrenceRule: RecurrenceRule.NONE,
           }
         : {
-            title: searchParams.get('title') ?? '',
-            expenseDate: searchParams.get('date')
-              ? new Date(searchParams.get('date') as string)
-              : getTodayForDateInput(),
-            amount: Number(searchParams.get('amount')) || 0,
-            originalCurrency: group.currencyCode ?? undefined,
-            originalAmount: undefined,
-            conversionRate: undefined,
-            category: searchParams.get('categoryId')
-              ? Number(searchParams.get('categoryId'))
-              : 0, // category with Id 0 is General
+            title: initialValues?.title ?? searchParams.get('title') ?? '',
+            expenseDate: initialValues?.expenseDate
+              ? new Date(initialValues.expenseDate as string | number | Date)
+              : searchParams.get('date')
+                ? new Date(searchParams.get('date') as string)
+                : getTodayForDateInput(),
+            amount:
+              initialValues?.amount !== undefined
+                ? initialValues.amount
+                : Number(searchParams.get('amount')) || 0,
+            originalCurrency:
+              initialValues?.originalCurrency ?? group.currencyCode ?? undefined,
+            originalAmount: initialValues?.originalAmount ?? undefined,
+            conversionRate: initialValues?.conversionRate ?? undefined,
+            category:
+              initialValues?.category ??
+              (searchParams.get('categoryId')
+                ? Number(searchParams.get('categoryId'))
+                : 0), // category with Id 0 is General
             // paid for all, split evenly
-            paidFor: defaultSplittingOptions.paidFor,
-            paidBy: getSelectedPayer(),
-            isReimbursement: false,
-            splitMode: defaultSplittingOptions.splitMode,
+            paidFor: initialValues?.paidFor ?? defaultSplittingOptions.paidFor,
+            paidBy: initialValues?.paidBy ?? getSelectedPayer(),
+            isReimbursement: initialValues?.isReimbursement ?? false,
+            splitMode:
+              initialValues?.splitMode ?? defaultSplittingOptions.splitMode,
             saveDefaultSplittingOptions: false,
             documents: searchParams.get('imageUrl')
               ? [
@@ -306,11 +319,23 @@ export function ExpenseForm({
                     height: Number(searchParams.get('imageHeight')),
                   },
                 ]
-              : [],
-            notes: '',
-            recurrenceRule: RecurrenceRule.NONE,
+              : initialValues?.documents ?? [],
+            notes: initialValues?.notes ?? '',
+            recurrenceRule:
+              initialValues?.recurrenceRule ?? RecurrenceRule.NONE,
           },
   })
+
+  // Sync form when initialValues are passed/updated (e.g. from AI assistant)
+  useEffect(() => {
+    if (initialValues && Object.keys(initialValues).length > 0) {
+      form.reset({
+        ...form.getValues(),
+        ...initialValues,
+      })
+    }
+  }, [initialValues]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const [isCategoryLoading, setCategoryLoading] = useState(false)
   const activeUserId = useActiveUser(group.id)
   const sendEvent = useAnalytics()
@@ -629,10 +654,22 @@ export function ExpenseForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submit)}>
         <Card>
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
             <CardTitle>
               {t(`${sExpense}.${isCreate ? 'create' : 'edit'}`)}
             </CardTitle>
+            {onSwitchToAi && (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={onSwitchToAi}
+                className="gap-1.5 text-xs text-primary hover:text-primary"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                <span>{t('ModeSelector.switchToAi')}</span>
+              </Button>
+            )}
           </CardHeader>
           <CardContent className="grid sm:grid-cols-2 gap-6">
             <FormField

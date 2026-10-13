@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Spliit',
-    short_name: 'Spliit',
+    name: 'Hisaab.ai',
+    short_name: 'Hisaab.ai',
     description:
-      'A minimalist web application to share expenses with friends and family. No ads, no account, no problem.',
+      'A minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     start_url: '/groups',
     id: '/groups',
     display: 'standalone',

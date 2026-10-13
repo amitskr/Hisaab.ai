@@ -24,14 +24,14 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(effectiveBaseUrl),
     title: {
       default: t('metaTitle'),
-      template: '%s · Spliit',
+      template: '%s · Hisaab.ai',
     },
     description:
-      'Spliit is a minimalist web application to share expenses with friends and family. No ads, no account, no problem.',
+      'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     openGraph: {
       title: t('metaTitle'),
       description:
-        'Spliit is a minimalist web application to share expenses with friends and family. No ads, no account, no problem.',
+        'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
       images: `/banner.png`,
       type: 'website',
       url: '/',
@@ -43,13 +43,13 @@ export async function generateMetadata(): Promise<Metadata> {
       images: `/banner.png`,
       title: t('metaTitle'),
       description:
-        'Spliit is a minimalist web application to share expenses with friends and family. No ads, no account, no problem.',
+        'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     },
     appleWebApp: {
       capable: true,
-      title: 'Spliit',
+      title: 'Hisaab.ai',
     },
-    applicationName: 'Spliit',
+    applicationName: 'Hisaab.ai',
     icons: [
       {
         url: '/android-chrome-192x192.png',
@@ -75,18 +75,19 @@ function Content({ children }: { children: React.ReactNode }) {
     <TRPCProvider>
       <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
         <Link
-          className="flex items-center gap-2 hover:scale-105 transition-transform"
+          className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
           href="/"
         >
-          <h1>
-            <Image
-              src="/logo-with-text.png"
-              className="m-1 h-auto w-auto"
-              width={(35 * 522) / 180}
-              height={35}
-              alt="Spliit"
-            />
-          </h1>
+          <Image
+            src="/icon.png"
+            className="rounded-xl shadow-sm"
+            width={34}
+            height={34}
+            alt="Hisaab.ai"
+          />
+          <span className="font-bold text-xl tracking-tight text-foreground flex items-center">
+            Hisaab<span className="text-emerald-500">.ai</span>
+          </span>
         </Link>
         <div role="navigation" aria-label="Menu" className="flex">
           <ul className="flex items-center text-sm">
@@ -115,14 +116,17 @@ function Content({ children }: { children: React.ReactNode }) {
       <footer className="sm:p-8 md:p-16 sm:mt-16 sm:text-sm md:text-base md:mt-32 bg-slate-50 dark:bg-card border-t p-6 mt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-xs [&_a]:underline">
         <div className="flex flex-col space-y-2">
           <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
-            <Link className="flex items-center gap-2" href="/">
+            <Link className="flex items-center gap-2.5" href="/">
               <Image
-                src="/logo-with-text.png"
-                className="m-1 h-auto w-auto"
-                width={(35 * 522) / 180}
-                height={35}
-                alt="Spliit"
+                src="/icon.png"
+                className="rounded-xl"
+                width={28}
+                height={28}
+                alt="Hisaab.ai"
               />
+              <span className="font-bold text-lg tracking-tight text-foreground flex items-center">
+                Hisaab<span className="text-emerald-500">.ai</span>
+              </span>
             </Link>
           </div>
           <div className="flex flex-col space-y a--no-underline-text-white">
