@@ -16,6 +16,8 @@ import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { AuthProvider } from './auth-provider'
+import { UserNav } from '@/components/user-nav'
 import { Footer } from './footer'
 import './globals.css'
 
@@ -74,48 +76,53 @@ function Content({ children }: { children: React.ReactNode }) {
   const t = useTranslations()
   return (
     <TRPCProvider>
-      <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
-        <Link
-          className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
-          href="/"
-        >
-          <Image
-            src="/icon.png"
-            className="rounded-xl shadow-sm"
-            width={34}
-            height={34}
-            alt="Hisaab.ai"
-          />
-          <span className="font-bold text-xl tracking-tight text-foreground flex items-center">
-            Hisaab<span className="text-emerald-500">.ai</span>
-          </span>
-        </Link>
-        <div role="navigation" aria-label="Menu" className="flex">
-          <ul className="flex items-center text-sm">
-            <li>
-              <Button
-                variant="ghost"
-                size="sm"
-                asChild
-                className="-my-3 text-primary"
-              >
-                <Link href="/groups">{t('Header.groups')}</Link>
-              </Button>
-            </li>
-            <li>
-              <LocaleSwitcher />
-            </li>
-            <li>
-              <ThemeToggle />
-            </li>
-          </ul>
-        </div>
-      </header>
+      <AuthProvider>
+        <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
+          <Link
+            className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
+            href="/"
+          >
+            <Image
+              src="/icon.png"
+              className="rounded-xl shadow-sm"
+              width={34}
+              height={34}
+              alt="Hisaab.ai"
+            />
+            <span className="font-bold text-xl tracking-tight text-foreground flex items-center">
+              Hisaab<span className="text-emerald-500">.ai</span>
+            </span>
+          </Link>
+          <div role="navigation" aria-label="Menu" className="flex">
+            <ul className="flex items-center gap-1 sm:gap-2 text-sm">
+              <li>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  asChild
+                  className="-my-3 text-primary"
+                >
+                  <Link href="/groups">{t('Header.groups')}</Link>
+                </Button>
+              </li>
+              <li>
+                <UserNav />
+              </li>
+              <li>
+                <LocaleSwitcher />
+              </li>
+              <li>
+                <ThemeToggle />
+              </li>
+            </ul>
+          </div>
+        </header>
 
-      <div className="pt-16 flex-1 flex flex-col">{children}</div>
+        <div className="pt-16 flex-1 flex flex-col">{children}</div>
 
-      <Footer />
-      <Toaster />
+        <Footer />
+        <Toaster />
+      </AuthProvider>
     </TRPCProvider>
   )
 }

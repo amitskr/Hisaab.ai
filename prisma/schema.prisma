@@ -24,6 +24,7 @@ model Group {
   activities   Activity[]
   createdAt    DateTime      @default(now())
   deleteAt     DateTime?
+  syncedUsers  UserGroup[]
 }
 
 model Participant {
@@ -135,4 +136,30 @@ enum ActivityType {
   DELETE_EXPENSE
   SCHEDULE_GROUP_DELETION
   RESTORE_GROUP
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  name         String?
+  image        String?
+  googleId     String      @unique
+  createdAt    DateTime    @default(now())
+  syncedGroups UserGroup[]
+}
+
+model UserGroup {
+  id                  String   @id @default(cuid())
+  userId              String
+  groupId             String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group               Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  isStarred           Boolean  @default(false)
+  isArchived          Boolean  @default(false)
+  activeParticipantId String?
+  updatedAt           DateTime @updatedAt
+
+  @@unique([userId, groupId])
+  @@index([userId])
+  @@index([groupId])
 }

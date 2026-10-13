@@ -13,7 +13,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="sm:p-8 md:p-16 sm:mt-16 sm:text-sm md:text-base md:mt-32 bg-slate-50 dark:bg-card border-t p-6 mt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-xs">
+    <footer className="mt-auto p-4 sm:p-6 bg-slate-50 dark:bg-card border-t flex flex-col sm:flex-row sm:justify-between items-center gap-3 text-xs">
       <div className="flex flex-col space-y-2">
         <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
           <Link className="flex items-center gap-2.5 hover:opacity-90 transition-opacity" href="/">

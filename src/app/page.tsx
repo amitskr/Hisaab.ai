@@ -11,37 +11,35 @@ import Link from 'next/link'
 export default function HomePage() {
   const t = useTranslations()
   return (
-    <main>
+    <main className="flex-1 flex flex-col justify-center items-center px-4 py-6 sm:py-8">
       <TrackPage path="/" />
-      <section className="py-16 md:py-24 lg:py-32">
-        <div className="container flex max-w-screen-md flex-col items-center gap-4 text-center">
-          <h1 className="!leading-none font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl landing-header py-2">
-            {t.rich('Homepage.title', {
-              strong: (chunks) => <strong>{chunks}</strong>,
-            })}
-          </h1>
-          <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            {t.rich('Homepage.description', {
-              strong: (chunks) => <strong>{chunks}</strong>,
-            })}
-          </p>
-          <div className="flex gap-2">
-            <Button asChild>
-              <Link href="/groups">{t('Homepage.button.groups')}</Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link
-                href="https://github.com/amitskr/Hisaab.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <GitHubLogoIcon className="w-4 h-4 mr-2" />
-                {t('Homepage.button.github')}
-              </Link>
-            </Button>
-          </div>
+      <div className="container flex max-w-screen-md flex-col items-center gap-3 sm:gap-5 text-center my-auto">
+        <h1 className="!leading-tight font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl landing-header py-1">
+          {t.rich('Homepage.title', {
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
+        </h1>
+        <p className="max-w-[38rem] leading-normal text-muted-foreground text-sm sm:text-base md:text-lg">
+          {t.rich('Homepage.description', {
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
+        </p>
+        <div className="flex gap-3 pt-2">
+          <Button asChild size="default" className="shadow-sm">
+            <Link href="/groups">{t('Homepage.button.groups')}</Link>
+          </Button>
+          <Button asChild variant="secondary" size="default">
+            <Link
+              href="https://github.com/amitskr/Hisaab.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GitHubLogoIcon className="w-4 h-4 mr-2" />
+              {t('Homepage.button.github')}
+            </Link>
+          </Button>
         </div>
-      </section>
+      </div>
     </main>
   )
 }

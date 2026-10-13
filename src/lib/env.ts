@@ -178,6 +178,18 @@ const envSchema = z
       interpretBlankEnvVarAsUndefined,
       z.string().optional(),
     ),
+    GOOGLE_CLIENT_ID: z.preprocess(
+      interpretBlankEnvVarAsUndefined,
+      z.string().optional(),
+    ),
+    GOOGLE_CLIENT_SECRET: z.preprocess(
+      interpretBlankEnvVarAsUndefined,
+      z.string().optional(),
+    ),
+    AUTH_SECRET: z.preprocess(
+      interpretBlankEnvVarAsUndefined,
+      z.string().optional(),
+    ),
   })
   .superRefine((env, ctx) => {
     // Either spelling enables the feature, so either has to satisfy the

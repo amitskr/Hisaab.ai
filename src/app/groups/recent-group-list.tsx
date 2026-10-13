@@ -23,6 +23,8 @@ import {
   useMemo,
   useState,
 } from 'react'
+import { useAuth } from '@/app/auth-provider'
+import { GoogleIcon } from '@/components/user-nav'
 import { GlobalBalanceCard } from './global-balance-card'
 import { RecentGroupListCard } from './recent-group-list-card'
 
@@ -87,6 +89,11 @@ export function RecentGroupList() {
 
   useEffect(() => {
     loadGroups()
+    const handleSync = () => loadGroups()
+    window.addEventListener('hisaab-groups-synced', handleSync)
+    return () => {
+      window.removeEventListener('hisaab-groups-synced', handleSync)
+    }
   }, [loadGroups])
 
   if (state.status === 'pending') return null
@@ -257,6 +264,42 @@ function GroupList({
   )
 }
 
+function SyncBanner() {
+  const { user, loginWithGoogle } = useAuth()
+  const [dismissed, setDismissed] = useState(false)
+
+  if (user || dismissed) return null
+
+  return (
+    <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs mb-3">
+      <div className="flex items-center gap-2">
+        <span className="text-base">✨</span>
+        <p className="text-foreground">
+          <strong>Sync across devices:</strong> Sign in with Google to access and update your groups from any phone or computer.
+        </p>
+      </div>
+      <div className="flex items-center gap-2 shrink-0">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={loginWithGoogle}
+          className="h-8 text-xs bg-white dark:bg-background border-emerald-300 dark:border-emerald-800 shadow-2xs gap-1.5 font-medium px-2.5"
+        >
+          <GoogleIcon className="w-3.5 h-3.5 shrink-0" />
+          <span>Sign in with Google</span>
+        </Button>
+        <button
+          onClick={() => setDismissed(true)}
+          className="text-muted-foreground hover:text-foreground text-xs px-1.5"
+          title="Dismiss"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function GroupsPage({
   children,
   reload,
@@ -278,6 +321,7 @@ function GroupsPage({
           </Button>
         </div>
       </div>
+      <SyncBanner />
       <div>{children}</div>
     </>
   )
