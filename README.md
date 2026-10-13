@@ -1,24 +1,23 @@
-[<img alt="Spliit" height="60" src="https://github.com/spliit-app/spliit/blob/main/public/logo-with-text.png?raw=true" />](https://spliit.app)
+# Hisaab.ai 💸✨
 
-Spliit is a free and open source alternative to Splitwise. You can either use the official instance at [Spliit.app](https://spliit.app), or deploy your own instance:
+> AI-Powered Expense Splitting for Friends and Family.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fspliit-app%2Fspliit&project-name=my-spliit-instance&repository-name=my-spliit-instance&stores=%5B%7B%22type%22%3A%22postgres%22%7D%5D&)
+Hisaab.ai is a modern, AI-enhanced expense splitting application with natural language expense creation, receipt scanning, and smart settlements.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Famitskr%2FHisaab.ai&project-name=hisaab-ai&stores=%5B%7B%22type%22%3A%22postgres%22%7D%5D&)
 
 ## Features
 
+- [x] **✨ AI Expense Assistant**: Add expenses using natural conversational language with intelligent fallback parsing
+- [x] **🔄 Dual-Mode Interface**: Switch seamlessly between the interactive AI chat and traditional manual form
 - [x] Create a group and share it with friends
-- [x] Create expenses with description
-- [x] Display group balances
+- [x] Create expenses with description & categories
+- [x] Display group balances and smart debt simplification
 - [x] Create reimbursement expenses
-- [x] Progressive Web App
-- [x] Select all/no participant for expenses
-- [x] Split expenses unevenly [(#6)](https://github.com/spliit-app/spliit/issues/6)
-- [x] Mark a group as favorite [(#29)](https://github.com/spliit-app/spliit/issues/29)
-- [x] Tell the application who you are when opening a group [(#7)](https://github.com/spliit-app/spliit/issues/7)
-- [x] Assign a category to expenses [(#35)](https://github.com/spliit-app/spliit/issues/35)
-- [x] Search for expenses in a group [(#51)](https://github.com/spliit-app/spliit/issues/51)
-- [x] Upload and attach images to expenses [(#63)](https://github.com/spliit-app/spliit/issues/63)
-- [x] Create expense by scanning a receipt [(#23)](https://github.com/spliit-app/spliit/issues/23)
+- [x] Progressive Web App (PWA) with offline support
+- [x] Split expenses evenly, by exact amounts, or percentages
+- [x] Attach images and receipts to expenses
+- [x] Create expense by scanning a receipt with OCR
 
 ### Possible incoming features
 
