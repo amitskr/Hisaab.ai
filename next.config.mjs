@@ -22,6 +22,16 @@ if (process.env.S3_UPLOAD_ENDPOINT) {
   })
 }
 
+// Google User Avatars
+remotePatterns.push({
+  protocol: 'https',
+  hostname: '*.googleusercontent.com',
+})
+remotePatterns.push({
+  protocol: 'https',
+  hostname: 'lh3.googleusercontent.com',
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Emit a self-contained server into .next/standalone, containing only the

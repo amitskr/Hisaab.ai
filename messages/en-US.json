@@ -1,8 +1,8 @@
 {
   "Homepage": {
     "title": "Share <strong>Expenses</strong> with <strong>Friends & Family</strong>",
-    "metaTitle": "Hisaab.ai · Share Expenses with Friends & Family",
-    "description": "Welcome to your new <strong>Hisaab.ai</strong> instance !",
+    "metaTitle": "HisaaabAI · Share Expenses with Friends & Family",
+    "description": "Welcome to your new <strong>HisaaabAI</strong> instance !",
     "button": {
       "groups": "Go to groups",
       "github": "GitHub"
@@ -622,7 +622,7 @@
   },
   "Pwa": {
     "updateTitle": "Update available",
-    "updateDescription": "A new version of Hisaab.ai is available.",
+    "updateDescription": "A new version of HisaaabAI is available.",
     "reload": "Reload"
   }
 }

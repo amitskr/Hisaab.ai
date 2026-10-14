@@ -1,8 +1,8 @@
-# Hisaab.ai 💸✨
+# HisaaabAI 💸✨
 
 > AI-Powered Expense Splitting for Friends and Family.
 
-Hisaab.ai is a modern, AI-enhanced expense splitting application with natural language expense creation, receipt scanning, and smart settlements.
+HisaaabAI is a modern, AI-enhanced expense splitting application with natural language expense creation, receipt scanning, and smart settlements.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Famitskr%2FHisaab.ai&project-name=hisaab-ai&stores=%5B%7B%22type%22%3A%22postgres%22%7D%5D&)
 

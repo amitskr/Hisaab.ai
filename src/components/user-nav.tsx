@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useAuth } from '@/app/auth-provider'
 import { Button } from '@/components/ui/button'
 import {
@@ -38,6 +39,7 @@ export function GoogleIcon({ className }: { className?: string }) {
 
 export function UserNav() {
   const { user, loading, loginWithGoogle, logout, syncCloud } = useAuth()
+  const [imageError, setImageError] = useState(false)
 
   if (loading) {
     return <div className="w-8 h-8 rounded-full bg-muted/40 animate-pulse" />
@@ -64,13 +66,16 @@ export function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="relative rounded-full h-8 w-8 p-0">
-          {user.image ? (
+          {user.image && !imageError ? (
             <Image
               src={user.image}
               alt={user.name || 'User'}
-              width={30}
-              height={30}
-              className="rounded-full ring-1 ring-border"
+              width={32}
+              height={32}
+              unoptimized
+              referrerPolicy="no-referrer"
+              onError={() => setImageError(true)}
+              className="rounded-full ring-1 ring-border object-cover"
             />
           ) : (
             <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
@@ -83,9 +88,26 @@ export function UserNav() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 p-1.5 text-xs">
         <DropdownMenuLabel className="font-normal p-2">
-          <div className="flex flex-col space-y-1">
-            <p className="font-semibold text-sm leading-none">{user.name || 'User'}</p>
-            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+          <div className="flex items-center gap-2.5">
+            {user.image && !imageError ? (
+              <Image
+                src={user.image}
+                alt={user.name || 'User'}
+                width={36}
+                height={36}
+                unoptimized
+                referrerPolicy="no-referrer"
+                className="rounded-full ring-1 ring-border object-cover shrink-0"
+              />
+            ) : (
+              <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
+                {initial}
+              </div>
+            )}
+            <div className="flex flex-col space-y-0.5 overflow-hidden">
+              <p className="font-semibold text-sm leading-none truncate">{user.name || 'User'}</p>
+              <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+            </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

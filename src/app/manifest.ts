@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Hisaab.ai',
-    short_name: 'Hisaab.ai',
+    name: 'HisaaabAI',
+    short_name: 'HisaaabAI',
     description:
       'A minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     start_url: '/groups',

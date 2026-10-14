@@ -408,7 +408,7 @@ export async function parseExpenseFromNaturalLanguage({
       const today = getTodayString()
 
       const promptContext = `
-You are the AI Expense Assistant for Hisaab.ai, an intelligent group expense splitting application.
+You are the AI Expense Assistant for HisaaabAI, an intelligent group expense splitting application.
 Today's date is: ${today}.
 Group Name: "${group.name}".
 Group Currency: "${group.currency}" (code: ${group.currencyCode || 'N/A'}).

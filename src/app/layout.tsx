@@ -27,14 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(effectiveBaseUrl),
     title: {
       default: t('metaTitle'),
-      template: '%s · Hisaab.ai',
+      template: '%s · HisaaabAI',
     },
     description:
-      'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
+      'HisaaabAI is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     openGraph: {
       title: t('metaTitle'),
       description:
-        'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
+        'HisaaabAI is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
       images: `/banner.png`,
       type: 'website',
       url: '/',
@@ -46,13 +46,13 @@ export async function generateMetadata(): Promise<Metadata> {
       images: `/banner.png`,
       title: t('metaTitle'),
       description:
-        'Hisaab.ai is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
+        'HisaaabAI is a minimalist AI-powered web application to share expenses with friends and family. No ads, no account, no problem.',
     },
     appleWebApp: {
       capable: true,
-      title: 'Hisaab.ai',
+      title: 'HisaaabAI',
     },
-    applicationName: 'Hisaab.ai',
+    applicationName: 'HisaaabAI',
     icons: [
       {
         url: '/android-chrome-192x192.png',
@@ -87,10 +87,10 @@ function Content({ children }: { children: React.ReactNode }) {
               className="rounded-xl shadow-sm"
               width={34}
               height={34}
-              alt="Hisaab.ai"
+              alt="HisaaabAI"
             />
-            <span className="font-bold text-xl tracking-tight text-foreground flex items-center">
-              Hisaab<span className="text-emerald-500">.ai</span>
+            <span className="font-bold text-xl tracking-tight text-foreground dark:text-white flex items-center">
+              Hisaaab<span className="text-emerald-500">AI</span>
             </span>
           </Link>
           <div role="navigation" aria-label="Menu" className="flex">
@@ -106,13 +106,13 @@ function Content({ children }: { children: React.ReactNode }) {
                 </Button>
               </li>
               <li>
-                <UserNav />
-              </li>
-              <li>
                 <LocaleSwitcher />
               </li>
               <li>
                 <ThemeToggle />
+              </li>
+              <li>
+                <UserNav />
               </li>
             </ul>
           </div>

@@ -44,29 +44,60 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL('/groups?auth_error=token_exchange_failed', origin))
     }
 
-    const tokenData = (await tokenResponse.json()) as { access_token?: string }
+    const tokenData = (await tokenResponse.json()) as {
+      access_token?: string
+      id_token?: string
+    }
     const accessToken = tokenData.access_token
 
-    // 2. Fetch user profile from Google
-    const profileResponse = await fetch('https://openidconnect.googleapis.com/v1/userinfo', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
+    let googleId: string | undefined
+    let email: string | undefined
+    let name: string | undefined
+    let image: string | undefined
 
-    if (!profileResponse.ok) {
-      return NextResponse.redirect(new URL('/groups?auth_error=profile_fetch_failed', origin))
+    // 2a. Decode id_token JWT payload if available
+    if (tokenData.id_token) {
+      try {
+        const parts = tokenData.id_token.split('.')
+        if (parts[1]) {
+          const payload = JSON.parse(
+            Buffer.from(parts[1], 'base64url').toString('utf-8')
+          ) as { sub?: string; email?: string; name?: string; picture?: string }
+          if (payload.sub) googleId = payload.sub
+          if (payload.email) email = payload.email
+          if (payload.name) name = payload.name
+          if (payload.picture) image = payload.picture
+        }
+      } catch (err) {
+        console.warn('Could not decode id_token:', err)
+      }
     }
 
-    const profile = (await profileResponse.json()) as {
-      sub: string
-      email: string
-      name?: string
-      picture?: string
+    // 2b. Fetch user profile from Google userinfo API
+    if (accessToken) {
+      try {
+        const userinfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        if (userinfoRes.ok) {
+          const prof = (await userinfoRes.json()) as {
+            sub?: string
+            email?: string
+            name?: string
+            picture?: string
+          }
+          if (prof.sub) googleId = prof.sub
+          if (prof.email) email = prof.email
+          if (prof.name) name = prof.name
+          if (prof.picture) image = prof.picture
+        }
+      } catch (err) {
+        console.warn('Google userinfo fetch failed:', err)
+      }
     }
-    // profile contains { sub, email, name, picture, ... }
-    const { sub: googleId, email, name, picture: image } = profile
 
-    if (!email) {
-      return NextResponse.redirect(new URL('/groups?auth_error=missing_email', origin))
+    if (!googleId || !email) {
+      return NextResponse.redirect(new URL('/groups?auth_error=missing_profile_data', origin))
     }
 
     // 3. Upsert user in database

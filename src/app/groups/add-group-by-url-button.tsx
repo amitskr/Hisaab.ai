@@ -132,7 +132,7 @@ export function AddGroupByUrlButton({ reload }: Props) {
             <Input
               type="url"
               required
-              placeholder="https://hisaab.ai/..."
+              placeholder="https://.../groups/..."
               className="flex-1 min-w-[200px] text-base"
               value={url}
               disabled={pending}

@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { HomeGoogleAuth } from '@/components/home-google-auth'
 // lucide-react v1 dropped its brand icons, so the GitHub mark comes from Radix.
 import { TrackPage } from '@/lib/analytics/track-page'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
@@ -39,6 +40,7 @@ export default function HomePage() {
             </Link>
           </Button>
         </div>
+        <HomeGoogleAuth />
       </div>
     </main>
   )

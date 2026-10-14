@@ -13,8 +13,8 @@ export function Footer() {
   }
 
   return (
-    <footer className="mt-auto p-4 sm:p-6 bg-slate-50 dark:bg-card border-t flex flex-col sm:flex-row sm:justify-between items-center gap-3 text-xs">
-      <div className="flex flex-col space-y-2">
+    <footer className="mt-auto p-4 sm:p-6 bg-slate-50 dark:bg-card border-t flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-3 text-xs text-left">
+      <div className="flex flex-col space-y-2 text-left items-start">
         <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
           <Link className="flex items-center gap-2.5 hover:opacity-90 transition-opacity" href="/">
             <Image
@@ -22,10 +22,10 @@ export function Footer() {
               className="rounded-xl shadow-sm"
               width={28}
               height={28}
-              alt="Hisaab.ai"
+              alt="HisaaabAI"
             />
-            <span className="font-bold text-lg tracking-tight text-foreground flex items-center">
-              Hisaab<span className="text-emerald-500">.ai</span>
+            <span className="font-bold text-lg tracking-tight text-foreground dark:text-white flex items-center">
+              Hisaaab<span className="text-emerald-500">AI</span>
             </span>
           </Link>
         </div>

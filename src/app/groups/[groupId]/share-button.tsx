@@ -38,7 +38,7 @@ export function ShareButton({ group }: Props) {
             <Input className="flex-1" defaultValue={url} readOnly />
             <CopyButton text={url} title={t('copyLink')} />
             <ShareUrlButton
-              text={`Join my group ${group.name} on Hisaab.ai`}
+              text={`Join my group ${group.name} on HisaaabAI`}
               url={url}
               title={t('shareLink')}
             />
